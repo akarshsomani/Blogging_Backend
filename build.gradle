@@ -1,0 +1,72 @@
+plugins {
+	id 'org.springframework.boot' version '2.3.4.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
+	id 'java'
+}
+
+group = 'com.demo'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+configurations {
+
+	all {
+		exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+	}
+
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+//	SPRING-BOOT
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+	compile group: 'javax.inject', name: 'javax.inject', version: '1'
+
+//	LOMBOK
+	compileOnly 'org.projectlombok:lombok:1.18.4'
+	annotationProcessor 'org.projectlombok:lombok:1.18.4'
+
+//	mysql
+	compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.6'
+//	runtime('com.oracle:ojdbc7:12.1.0.2.0')
+
+//	spring security
+	compile "org.springframework.boot:spring-boot-starter-security"
+
+//	logging
+	compile('org.springframework.boot:spring-boot-starter-log4j2')
+
+//	ModelMapper
+	compile group: 'org.modelmapper', name: 'modelmapper', version: '0.7.5'
+
+
+//	Hibernate
+	compile group: 'org.hibernate', name: 'hibernate-gradle-plugin', version: '5.4.22.Final'
+
+//	swagger
+	compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.7.0'
+	compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.7.0'
+
+
+	compile 'com.fasterxml.jackson.core:jackson-core:2.11.3'
+	compile 'com.fasterxml.jackson.core:jackson-annotations:2.11.3'
+	compile 'com.fasterxml.jackson.core:jackson-databind:2.11.3'
+
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+	testImplementation 'org.springframework.integration:spring-integration-test'
+}
+
+test {
+	useJUnitPlatform()
+}
